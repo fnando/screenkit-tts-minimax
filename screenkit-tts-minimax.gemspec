@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name    = "screenkit-tts-minimax"
-  spec.version = "0.0.0"
+  spec.version = "0.0.1"
   spec.authors = ["Nando Vieira"]
   spec.email   = ["me@fnando.com"]
   spec.metadata = {"rubygems_mfa_required" => "true"}
