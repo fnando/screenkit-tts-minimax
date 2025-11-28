@@ -1,0 +1,129 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "https://screenkit.dev/schemas/tts/minimax.json",
+  "title": "MiniMax Text-to-Speech API Schema",
+  "description": "JSON Schema for MiniMax Text-to-Speech (T2A) HTTP API",
+  "type": "object",
+  "required": ["model", "text"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "A unique identifier for the tts configuration"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "engine": {
+      "type": "string",
+      "enum": ["minimax"],
+      "description": "The TTS engine to use"
+    },
+    "model": {
+      "type": "string",
+      "description": "The speech synthesis model version to use",
+      "enum": [
+        "speech-2.6-hd",
+        "speech-2.6-turbo",
+        "speech-02-hd",
+        "speech-02-turbo",
+        "speech-01-hd",
+        "speech-01-turbo"
+      ]
+    },
+    "text": {
+      "type": "string",
+      "description": "The text to be converted into speech. Must be less than 10,000 characters. For texts over 3,000 characters, streaming output is recommended. Paragraph breaks should be marked with newline characters. Pause control: You can customize speech pauses by adding markers in the form <#x#>, where x is the pause duration in seconds. Valid range: [0.01, 99.99], up to two decimal places. Pause markers must be placed between speakable text segments and cannot be used consecutively.",
+      "maxLength": 10000,
+      "minLength": 1
+    },
+    "voice_id": {
+      "type": "string",
+      "description": "Voice ID to use for speech synthesis"
+    },
+    "language": {
+      "type": "string",
+      "description": "Controls whether recognition for specific minority languages and dialects is enhanced. Default is null. If the language type is unknown, set to 'auto' and the model will automatically detect it.",
+      "enum": [
+        "Chinese",
+        "Chinese,Yue",
+        "English",
+        "Arabic",
+        "Russian",
+        "Spanish",
+        "French",
+        "Portuguese",
+        "German",
+        "Turkish",
+        "Dutch",
+        "Ukrainian",
+        "Vietnamese",
+        "Indonesian",
+        "Japanese",
+        "Italian",
+        "Korean",
+        "Thai",
+        "Polish",
+        "Romanian",
+        "Greek",
+        "Czech",
+        "Finnish",
+        "Hindi",
+        "Bulgarian",
+        "Danish",
+        "Hebrew",
+        "Malay",
+        "Persian",
+        "Slovak",
+        "Swedish",
+        "Croatian",
+        "Filipino",
+        "Hungarian",
+        "Norwegian",
+        "Slovenian",
+        "Catalan",
+        "Nynorsk",
+        "Tamil",
+        "Afrikaans",
+        "auto"
+      ]
+    },
+    "voice_setting": {
+      "type": "object",
+      "description": "Voice effects configuration",
+      "properties": {
+        "speed": {
+          "type": "number",
+          "description": "Speech speed"
+        },
+        "vol": {
+          "type": "number",
+          "description": "Volume level"
+        },
+        "pitch": {
+          "type": "number",
+          "description": "Pitch level"
+        }
+      }
+    },
+    "audio_setting": {
+      "type": "object",
+      "description": "Audio output settings",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Supported audio formats. Non-streaming: mp3, wav, flac. Streaming: mp3",
+          "enum": ["mp3", "wav", "flac"]
+        },
+        "sample_rate": {
+          "type": "integer",
+          "description": "Audio sample rate in Hz"
+        },
+        "bitrate": {
+          "type": "integer",
+          "description": "Audio bitrate"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
